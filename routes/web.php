@@ -3,17 +3,15 @@
 use App\Book;
 use Illuminate\Http\Request;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'BooksController@index');
 
-Route::post('/books', function (Request $request) {
-    //
-});
+Route::post('/books','BooksController@store');
 
-Route::delete('/book/{book}', function (Book $book) {
-    //
-});
+Route::post('/booksedit/{books}','BooksController@edit');
+
+Route::post('/books/update','BooksController@update');
+
+Route::delete('/book/{book}','BooksController@destroy');
 
 Auth::routes();
 
