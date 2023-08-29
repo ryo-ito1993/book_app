@@ -90,5 +90,16 @@
             </div>
         </div>
     @endif
+    <div class="mt-4 ml-3">
+      <form action="{{ url('/') }}" method="GET">
+          <div class="form-group col-md-9">
+              <label for="search" class="col-sm-3 control-label font-weight-bold">登録した本の検索</label>
+              <input type="text" name="search" class="form-control" placeholder="タイトルを入力してください...">
+              <button type="submit" class="btn btn-primary mt-2">
+                  検索
+              </button>
+          </div>
+      </form>
+    </div>
 
 @endsection
