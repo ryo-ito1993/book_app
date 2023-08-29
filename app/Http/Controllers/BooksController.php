@@ -9,14 +9,20 @@ use Auth;
 
 class BooksController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index() {
-        $books = Book::orderBy('created_at', 'desc')->get();
+        $books = Book::where('user_id',Auth::user()->id)->orderBy('created_at', 'desc')->get();
         return view('books', [
             'books' => $books
         ]);
     }
 
-    public function edit(Book $books) {
+    public function edit($book_id){
+        $books = Book::where('user_id',Auth::user()->id)->find($book_id);
         return view('booksedit', [
             'book' => $books
         ]);
@@ -37,7 +43,7 @@ class BooksController extends Controller
                 ->withErrors($validator);
         }
 
-        $books = Book::find($request->id);
+        $books = Book::where('user_id',Auth::user()->id)->find($request->id);
         $books->title = $request->title;
         $books->note = $request->note;
         $books->finished_date = $request->finished_date;
@@ -58,6 +64,7 @@ class BooksController extends Controller
         }
 
         $books = new Book;
+        $books->user_id  = Auth::user()->id;
         $books->title   = $request->title;
         $books->note = $request->note;
         $books->finished_date   = $request->finished_date;

@@ -6,9 +6,10 @@
       </div>
     @endif
     <div class="card-body">
-        <div class="card-title">
+        <h3 class="card-title ml-3">
             本の登録
-        </div>
+        </h3>
+        <p class="ml-3 mb-3">読み終わった本を登録して積み上げよう！</p>
 
         @include('common.errors')
 
@@ -44,6 +45,7 @@
                         <th>タイトル</th>
                         <th>メモ</th>
                         <th>読了日</th>
+                        <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </thead>
                     <tbody>
