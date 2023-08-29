@@ -14,8 +14,20 @@ class BooksController extends Controller
         $this->middleware('auth');
     }
 
-    public function index() {
-        $books = Book::where('user_id',Auth::user()->id)->orderBy('created_at', 'desc')->get();
+    public function index(Request $request) {
+        $search = $request->get('search');
+
+        if ($search) {
+            $books = Book::where('user_id', Auth::user()->id)
+                        ->where('title', 'like', "%{$search}%")
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+        } else {
+            $books = Book::where('user_id', Auth::user()->id)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+        }
+
         return view('books', [
             'books' => $books
         ]);
